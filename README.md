@@ -9,87 +9,174 @@
 </p>
 
 <p align="center">
-  An intelligent wearable glove that combines <b>Computer Vision</b>, <b>Artificial Intelligence</b>, and <b>Embedded Systems</b> to provide real-time obstacle detection and navigation assistance.
+An intelligent wearable assistive device that combines <b>Artificial Intelligence</b>, <b>Computer Vision</b>, and <b>Embedded Systems</b> to provide real-time obstacle detection, directional navigation, and voice guidance for visually impaired users.
 </p>
 
 ---
 
 # 📖 Overview
 
-**GuardianWalk** is an AI-powered wearable navigation system developed to enhance the mobility, independence, and safety of visually impaired individuals.
+**GuardianWalk** is an AI-powered wearable navigation system designed to improve the mobility, independence, and safety of visually impaired individuals.
 
-The system integrates an **ESP32-CAM**, **YOLOv8 object detection**, and a **Python-based AI server** to identify obstacles in real time. Once an object is detected, the system determines the safest direction and guides the user using **vibration motors** and **audio alerts**.
+The system uses an **ESP32-CAM** mounted on a wearable glove to continuously capture images of the surrounding environment. These images are transmitted wirelessly to a **Python AI server**, where a **YOLOv8 object detection model** identifies nearby obstacles in real time.
 
-GuardianWalk demonstrates the practical integration of **Artificial Intelligence, Computer Vision, IoT, Embedded Systems, and Assistive Technology** into a lightweight, wearable solution.
+After processing the scene, the AI determines the location of detected objects and provides intuitive navigation feedback through:
+
+- 📳 Dual vibration motors for left and right directional guidance.
+- 🎧 Bluetooth voice assistance for spoken navigation instructions.
+
+The vibration intensity automatically increases as obstacles become closer, allowing users to understand both the **direction** and **distance** of nearby objects without requiring visual information.
+
+GuardianWalk combines **Artificial Intelligence, Computer Vision, IoT, Embedded Systems, and Assistive Technology** into a lightweight wearable solution that enhances independent mobility.
 
 ---
 
 # 🎯 Project Objective
 
-The objective of GuardianWalk is to develop an affordable smart wearable device that enables visually impaired users to navigate safely by detecting nearby obstacles and providing intuitive haptic and audio feedback in real time.
+The objective of GuardianWalk is to develop an affordable AI-powered wearable navigation device that assists visually impaired individuals by detecting obstacles in real time and providing intuitive directional feedback through vibration and Bluetooth voice guidance.
 
 ---
 
-# ✨ Key Features
+# ✨ Features
 
 - 🧤 Wearable glove-based navigation system
 - 📷 Real-time image capture using ESP32-CAM
-- 🤖 YOLOv8 AI-powered object detection
-- 📡 Wireless communication via Wi-Fi
-- 📳 Haptic navigation using vibration motors
-- 🔊 Audio alerts using buzzer
-- ⚡ Lightweight and portable design
+- 🤖 YOLOv8 AI object detection
+- 📡 Wireless communication over Wi-Fi
+- 📳 Dual coin vibration motors
+- 🎧 Bluetooth voice navigation
+- 📏 Distance-aware vibration intensity
+- ⚡ Lightweight and rechargeable
 - ♿ Designed specifically for visually impaired users
+- 🚶 Real-time obstacle avoidance
 
 ---
 
 # 🧠 System Architecture
 
-```
-                +----------------+
-                |   ESP32-CAM    |
-                | Capture Images |
-                +--------+-------+
-                         |
-                         | Wi-Fi
+```text
+                  +----------------+
+                  |   ESP32-CAM    |
+                  | Capture Images |
+                  +--------+-------+
+                           |
+                           | Wi-Fi
+                           ▼
+                +----------------------+
+                | Python AI Server     |
+                | Flask + YOLOv8       |
+                +----------+-----------+
+                           |
+                           ▼
+                +----------------------+
+                | Object Detection     |
+                | Position & Distance  |
+                +----------+-----------+
+                           |
+                           ▼
+               +------------------------+
+               | Navigation Decision    |
+               +----------+-------------+
+                          |
+                          ▼
+                 +----------------------+
+                 | ESP32 Controller     |
+                 +----------+-----------+
+                            |
+          +-----------------+------------------+
+          |                                    |
+          ▼                                    ▼
+ Left Coin Vibration                  Right Coin Vibration
+          │                                    │
+          └──────────────┬─────────────────────┘
                          ▼
-               +-------------------+
-               |   Python Server   |
-               | Flask API + AI    |
-               +--------+----------+
-                        |
-                        ▼
-             +----------------------+
-             | YOLOv8 Object Model  |
-             +----------+-----------+
-                        |
-                        ▼
-            +------------------------+
-            | Navigation Decision    |
-            +----------+-------------+
-                       |
-                       ▼
-             +----------------------+
-             | ESP32 Feedback Unit  |
-             +----------+-----------+
-                        |
-          +-------------+--------------+
-          |                            |
-          ▼                            ▼
-  Vibration Motors                 Buzzer Alert
+              Bluetooth Voice Guidance
 ```
 
 ---
 
 # ⚙️ Working Principle
 
-1. The ESP32-CAM captures images continuously.
+1. The ESP32-CAM continuously captures images of the user's surroundings.
 2. Images are transmitted to the AI server through Wi-Fi.
-3. The server processes each image using the YOLOv8 object detection model.
-4. Detected objects are classified and analyzed.
+3. The AI server processes every frame using the YOLOv8 object detection model.
+4. Objects are identified along with their relative position and estimated distance.
 5. The safest navigation direction is determined.
-6. Commands are sent back to the ESP32.
-7. Vibration motors guide the user, while the buzzer warns about nearby obstacles.
+6. Commands are transmitted back to the ESP32.
+7. Directional vibration and Bluetooth voice guidance assist the user in avoiding obstacles.
+
+---
+
+# 📳 Navigation Feedback System
+
+GuardianWalk provides intuitive feedback using two vibration motors and Bluetooth voice guidance.
+
+## Left Obstacle
+
+- Left vibration motor activates.
+- Bluetooth announces the obstacle on the left.
+- Vibration becomes stronger as the obstacle gets closer.
+
+---
+
+## Right Obstacle
+
+- Right vibration motor activates.
+- Bluetooth announces the obstacle on the right.
+- Stronger vibration indicates reduced distance.
+
+---
+
+## Obstacle in Front
+
+- Both vibration motors activate simultaneously.
+- Bluetooth warns the user that an obstacle is directly ahead.
+- Continuous strong vibration indicates immediate danger.
+
+---
+
+## Clear Path
+
+- No vibration.
+- Bluetooth may provide navigation instructions or indicate that the path is clear.
+
+---
+
+# 📏 Distance-Based Feedback
+
+GuardianWalk adjusts vibration intensity according to the detected object's distance.
+
+| Estimated Distance | Feedback |
+|-------------------|----------|
+| Greater than 2 m | No vibration or light pulse |
+| 1–2 m | Medium vibration |
+| Less than 1 m | Strong vibration |
+| Very Close | Continuous strong vibration + immediate voice warning |
+
+This allows users to understand not only the direction of obstacles but also how close they are.
+
+---
+
+# 🎯 AI Detection Capabilities
+
+GuardianWalk is capable of detecting various everyday objects, including:
+
+- 🚶 Person
+- 🚗 Car
+- 🚌 Bus
+- 🏍 Motorcycle
+- 🚲 Bicycle
+- 🪑 Chair
+- 🛋 Sofa
+- 🚪 Door
+- 🪜 Stairs
+- 🌳 Tree
+- 🧱 Wall
+- 📦 Box
+- 🪧 Signboard
+- 🛒 Shopping Cart
+- 🐕 Animals
+- Other common obstacles supported by YOLOv8
 
 ---
 
@@ -97,12 +184,13 @@ The objective of GuardianWalk is to develop an affordable smart wearable device 
 
 | Component | Description |
 |-----------|-------------|
-| ESP32-CAM | Captures real-time images |
-| Coin Vibration Motors (2x) | Directional haptic feedback |
-| Buzzer | Audio warning system |
-| Rechargeable Lithium-ion Battery | Portable power source |
-| Wearable Glove | Device mounting platform |
-| Connecting Wires | Circuit connections |
+| ESP32-CAM | Image acquisition |
+| Left Coin Vibration Motor | Indicates obstacles on the left |
+| Right Coin Vibration Motor | Indicates obstacles on the right |
+| Bluetooth Audio Module | Voice guidance |
+| Rechargeable Lithium-ion Battery | Portable power |
+| Wearable Glove | Device mounting |
+| Connecting Wires | Hardware connections |
 
 ---
 
@@ -113,7 +201,7 @@ The objective of GuardianWalk is to develop an affordable smart wearable device 
 | Python | AI Processing |
 | YOLOv8 (Ultralytics) | Object Detection |
 | OpenCV | Image Processing |
-| Flask | Communication API |
+| Flask | API Communication |
 | Arduino IDE | ESP32 Programming |
 | Git & GitHub | Version Control |
 
@@ -121,7 +209,7 @@ The objective of GuardianWalk is to develop an affordable smart wearable device 
 
 # 🚀 Installation
 
-## Clone the Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/joshua14134/GuardianWalk.git
@@ -131,7 +219,7 @@ cd GuardianWalk
 
 ---
 
-## Install Dependencies
+## Install Python Packages
 
 ```bash
 pip install -r server/requirements.txt
@@ -139,7 +227,7 @@ pip install -r server/requirements.txt
 
 ---
 
-## Start the AI Server
+## Start AI Server
 
 ```bash
 python server/guardianwalk_server.py
@@ -149,17 +237,17 @@ python server/guardianwalk_server.py
 
 ## Upload ESP32 Firmware
 
-1. Open the **esp32** folder in Arduino IDE.
-2. Select the ESP32-CAM board.
-3. Connect your ESP32-CAM.
+1. Open Arduino IDE.
+2. Open the **esp32** folder.
+3. Select the ESP32-CAM board.
 4. Upload the firmware.
-5. Ensure both the ESP32 and AI server are connected to the same Wi-Fi network.
+5. Connect the ESP32-CAM to the same Wi-Fi network as the AI server.
 
 ---
 
-# 🔄 System Workflow
+# 🔄 Complete Workflow
 
-```
+```text
 ESP32-CAM
       │
       ▼
@@ -169,20 +257,26 @@ Capture Image
 Send Image via Wi-Fi
       │
       ▼
-Flask AI Server
+Python Flask Server
       │
       ▼
 YOLOv8 Detection
       │
       ▼
-Navigation Decision
+Determine Position
+      │
+      ▼
+Estimate Distance
+      │
+      ▼
+Generate Navigation
       │
       ▼
 ESP32 Controller
       │
-      ├── Left Motor
-      ├── Right Motor
-      └── Buzzer
+      ├── Left Vibration
+      ├── Right Vibration
+      └── Bluetooth Voice Output
 ```
 
 ---
@@ -193,34 +287,34 @@ ESP32 Controller
 <img src="banner.png" width="100%">
 </p>
 
-The banner above showcases the GuardianWalk wearable prototype, system architecture, hardware components, AI object detection, and overall navigation workflow.
+The demonstration above showcases the complete GuardianWalk system, including the wearable glove prototype, ESP32-CAM, AI processing workflow, object detection, directional navigation, and Bluetooth voice guidance.
 
 ---
 
 # 💡 Applications
 
-- Smart Wearable Technology
-- Assistive Devices
-- AI Navigation Systems
-- Computer Vision Projects
-- Embedded Systems
-- IoT Applications
+- Smart Assistive Technology
+- Wearable AI Devices
+- Navigation Assistance
 - Healthcare Technology
-- Academic Research
+- Embedded AI Systems
+- Computer Vision Research
+- IoT Applications
+- Accessibility Solutions
 
 ---
 
 # 🚀 Future Enhancements
 
-- 📏 Real-time Distance Estimation
-- 🗺 GPS Navigation
-- 🧠 Edge AI using Raspberry Pi
-- 🎙 Voice Assistant Integration
-- 📱 Android & iOS Mobile Application
-- ☁ Cloud Monitoring Dashboard
-- 🔋 Improved Battery Optimization
-- 🦯 Smart Cane Integration
-- 🌍 Offline AI Processing
+- 📏 Monocular depth estimation
+- 🗺 GPS-assisted outdoor navigation
+- 📱 Android companion application
+- ☁ Cloud synchronization
+- 🧠 Edge AI processing using Raspberry Pi
+- 🎙 Advanced voice assistant
+- 🔋 Longer battery life
+- 🦯 Smart cane integration
+- 🌍 Offline object detection
 
 ---
 
@@ -235,23 +329,23 @@ This project demonstrates practical implementation of:
 - Embedded Systems
 - ESP32 Development
 - OpenCV
-- Flask API
+- Flask API Development
 - Python Programming
 - IoT Communication
-- Wearable Device Design
+- Wearable Computing
 - Human-Centered Assistive Technology
 
 ---
 
 # 👥 Team Project
 
-GuardianWalk was developed as a collaborative academic project focused on designing an intelligent wearable navigation system for visually impaired individuals. The project combines AI, embedded systems, and real-time communication to provide an affordable assistive solution that improves user mobility and safety.
+GuardianWalk was developed as a collaborative academic project focused on designing an affordable AI-powered wearable navigation system for visually impaired individuals. The project integrates Artificial Intelligence, Embedded Systems, IoT, and Computer Vision to deliver real-time obstacle detection and intuitive navigation assistance.
 
 ---
 
 # 📈 Future Scope
 
-Future versions of GuardianWalk may incorporate advanced depth estimation, simultaneous localization and mapping (SLAM), cloud synchronization, GPS-assisted outdoor navigation, voice interaction, and edge AI processing. These improvements aim to enhance accuracy, reduce latency, and make the system completely standalone for everyday use.
+Future versions of GuardianWalk can integrate advanced depth estimation, GPS navigation, indoor mapping, SLAM, cloud connectivity, mobile applications, and edge AI processing to improve navigation accuracy and create a completely standalone wearable navigation system.
 
 ---
 
@@ -270,9 +364,9 @@ This project is licensed under the **MIT License**.
 ---
 
 <p align="center">
-Made with ❤️ to improve accessibility through Artificial Intelligence.
+❤️ Built to improve accessibility through Artificial Intelligence and Assistive Technology.
 </p>
 
 <p align="center">
-⭐ If you found this project interesting, consider giving it a Star on GitHub.
+⭐ If you found this project useful, consider giving it a <b>Star</b> on GitHub.
 </p>
