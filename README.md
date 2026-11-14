@@ -311,21 +311,21 @@ Once the server and ESP32-CAM are connected, the system can begin capturing imag
 ## 📸 13. Project Demonstration
 
 <p align="center">
-  <a href="project_demo.mp4">
+  <a href="./project_demo.mp4">
     <img
-      src="guardianwalk-thumbnail.png"
-      alt="GuardianWalk Project Demonstration - Click to Play"
+      src="./guardianwalk-thumbnail.png"
+      alt="GuardianWalk Project Demonstration"
       width="100%"
     />
   </a>
 </p>
 
 <p align="center">
-  <a href="project_demo.mp4">
+  <a href="./project_demo.mp4">
     <strong>▶️ PLAY PROJECT DEMO</strong>
   </a>
   &nbsp;&nbsp; | &nbsp;&nbsp;
-  <a href="project_demo.mp4" download>
+  <a href="./project_demo.mp4">
     <strong>⬇️ DOWNLOAD VIDEO (MP4)</strong>
   </a>
 </p>
