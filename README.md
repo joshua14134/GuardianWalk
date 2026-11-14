@@ -312,7 +312,7 @@ Once the server and ESP32-CAM are connected, the system can begin capturing imag
 
 <p align="center">
   <video width="85%" controls>
-    <source src="./project%20demo.mp4" type="video/mp4">
+    <source src="./project_demo.mp4" type="video/mp4">
     Your browser does not support video playback.
   </video>
 </p>
