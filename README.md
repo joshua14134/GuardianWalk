@@ -284,7 +284,7 @@ ESP32 Controller
 # 📸 Project Demonstration
 
 <p align="center">
-<img src="banner.png" width="100%">
+<img src="project demo.mp4" width="100%">
 </p>
 
 The demonstration above showcases the complete GuardianWalk system, including the wearable glove prototype, ESP32-CAM, AI processing workflow, object detection, directional navigation, and Bluetooth voice guidance.
