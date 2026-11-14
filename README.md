@@ -311,7 +311,7 @@ Once the server and ESP32-CAM are connected, the system can begin capturing imag
 ## 📸 13. Project Demonstration
 
 <p align="center">
-  <a href="project_demo.mp4">
+  <a href="project%20demo.mp4">
     ▶️ Watch GuardianWalk Project Demonstration
   </a>
 </p>
