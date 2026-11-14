@@ -311,29 +311,27 @@ Once the server and ESP32-CAM are connected, the system can begin capturing imag
 ## 📸 13. Project Demonstration
 
 <p align="center">
-  <img
-    src="guardianwalk-thumbnail.png"
-    alt="GuardianWalk Project Demonstration Thumbnail"
-    width="85%"
-  />
+  <a href="project_demo.mp4">
+    <img
+      src="guardianwalk-thumbnail.png"
+      alt="GuardianWalk Project Demo - Click to Play"
+      width="85%"
+    />
+  </a>
 </p>
 
 <p align="center">
-  <video
-    width="85%"
-    controls
-    preload="metadata"
-    poster="guardianwalk-thumbnail.png"
-  >
-    <source src="project_demo.mp4" type="video/mp4">
-    Your browser does not support video playback.
-  </video>
+  <a href="project_demo.mp4">
+    <strong>▶️ PLAY PROJECT DEMO</strong>
+  </a>
+  &nbsp;&nbsp; | &nbsp;&nbsp;
+  <a href="project_demo.mp4" download>
+    <strong>⬇️ DOWNLOAD VIDEO (MP4)</strong>
+  </a>
 </p>
 
 <p align="center">
-  <a href="project_demo.mp4">▶️ Play Project Demo</a>
-  &nbsp; | &nbsp;
-  <a href="project_demo.mp4?download=1" download>⬇️ Download Video (MP4)</a>
+  Click the thumbnail or Play Project Demo to open the video.
 </p>
 
 The demonstration showcases the GuardianWalk wearable glove prototype, ESP32-CAM integration, AI-powered object detection, directional navigation, and Bluetooth voice guidance.
